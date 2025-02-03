@@ -1,0 +1,269 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "measurementResult",
+	"description": "A measurement result object",
+	"$comments": [
+		"MDF - Metrological Digital Framework",
+		"",
+		"Copyright (c) 2023 Hugo Gasca Aragon",
+		"",
+		"This json Schema is free software: you can redistribute it and/or modify ",
+		"it under the terms of the GNU Lesser General Public License as published by ",
+		"the Free Software Foundation, version 2.1 of the License.",
+		"",
+		"This json schema is distributed in the hope that it will be useful, ",
+		"but WITHOUT ANY WARRANTY; without even the implied warranty of ",
+		"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the ",
+		"GNU Lesser General Public License for more details.",
+		"",
+		"The development of minimum requirements for metrological digital framework (MDF) ",
+		"is supported by the joint research projects of interested collaborators.",
+		"",
+		"Documentation: https://github.com/HugoGasca/MetrologicalDigitalFramework.git"
+	],
+	"type": "object",
+	"properties": {
+		"class": {
+			"description": "The class must be measurementResult",
+			"const": "measurementResult"
+		},
+		"administrativeData": {
+			"type": "object",
+			"properties": {
+				"organization": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"description": "Name of the organization",
+							"type": "string"
+						}
+					}
+				},
+				"project": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"description": "Name of the project where the measurementResult is obtained",
+							"type": "string"
+						}
+					}
+				},
+				"software": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"description": "Name of the software used",
+							"type": "string"
+						},
+						"version": {
+							"description": "Version of the software used",
+							"type": "string"
+						},
+						"URL": {
+							"description": "URL of the software can be downloaded or accessed",
+							"type": "string"
+						}
+					}
+				}
+			},
+			"required": ["organization", "project", "software"]
+		},
+
+		"uncertaintyBudget":{
+			"type": "object",
+			"properties": {
+				"inputQuantities": {
+					"type": "array",
+					"items": {"$ref": "#/$defs/inputQuantity"}
+				},
+				"inputCorrelations": {
+					"type": ["array", "null"],
+					"items": {"$ref": "#/$defs/correlation"}
+				}
+			},
+			"required": ["inputQuantities", "inputCorrelations"]
+		},
+
+		"outputQuantities": {
+			"type": "array",
+			"items": {"$ref": "#/$defs/outputQuantity"}
+		},
+		"outputCorrelations": {
+			"type": ["array", "null"],
+			"items": {"$ref": "#/$defs/correlation"}
+		},
+
+		"computationDetails": {
+			"type": "object",
+			"properties": {
+				"methodName": {
+					"description": "method name used to compute the output quantities",
+					"type": ["string", "null"]
+				},
+				"methodReference": {
+					"description": "qualified reference to the method used",
+					"type": ["string", "null"]
+				}
+			},
+			"required": ["methodName", "methodReference"]
+		}
+	},
+	"$defs": {
+		"inputQuantity": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "name of the input quantity",
+					"type": "string"
+				},
+				"label": {
+					"description": "label of the input quantity",
+					"type": "string"
+				},
+				"value": {
+					"description": "value of the input quantity",
+					"type": "number"
+				},
+				"unit": {
+					"description": "measurement unit of the input quantity",
+					"type": "string"
+				},
+				"dateTime": {
+					"description": "datetime string",
+					"type": ["string"],
+				      "pattern": "^(null)|((Mon|Tue|Wed|Thu|Fri|Sat|Sun)? (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)? (0[1-9]|1[0-9]|2[0-9]|3[0-1]) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]) [0-9]{4})$"
+				},
+				"stdUncertainty": {
+					"description": "value of the standard uncertainty of the input quantity",
+					"type": "number",
+					"exclusiveMinimum": 0
+				},
+				"coverageFactor": {
+					"description": "coverage factor for the expanded uncertainty of the input quantity value to have the stated coverage probability",
+					"type": "number",
+					"exclusiveMinimum": 1
+				},
+				"coverageProbability": {
+					"description": "probability that the true value input quantity is within the value plus and minus the expanded uncertainty",
+					"type": "number",
+					"exclusiveMinimum": 0,
+					"maximum": 1
+				},
+				"distribution": {
+					"description": "distribution of the input quantity",
+					"type": "string"
+				},
+				"dof": {
+					"description": "degrees of freedom of the standard uncertainty of the input quantity value",
+					"type": "number",
+					"exclusiveMinimum": 0
+				},
+				"evaluationType": {
+					"description": "evaluation type of the uncertainty",
+					"type": "string"
+				},
+				"description": {
+					"description": "description of the input quantity",
+					"type": "string"
+				},
+				"source": {
+					"description": "description of the input quantity",
+					"type": "string"
+				}
+			},
+			"required": ["name", "label", "value", "unit", "dateTime", "stdUncertainty", "coverageFactor", "coverageProbability", "distribution", "dof", "evaluationType", "description", "source"]
+		},
+		"outputQuantity": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "name of the input quantity",
+					"type": "string"
+				},
+				"label": {
+					"description": "label of the input quantity",
+					"type": "string"
+				},
+				"value": {
+					"description": "value of the input quantity",
+					"type": "number"
+				},
+				"unit": {
+					"description": "measurement unit of the input quantity",
+					"type": "string"
+				},
+				"dateTime": {
+					"description": "datetime string",
+					"type": ["string"],
+				      "pattern": "^(null)|((Mon|Tue|Wed|Thu|Fri|Sat|Sun)? (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)? (0[1-9]|1[0-9]|2[0-9]|3[0-1]) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]) [0-9]{4})$"
+				},
+				"stdUncertainty": {
+					"description": "value of the standard uncertainty of the input quantity",
+					"type": ["number", "null"],
+					"exclusiveMinimum": 0
+				},
+				"coverageFactor": {
+					"description": "coverage factor for the expanded uncertainty of the input quantity value to have the stated coverage probability",
+					"type": ["number", "null"],
+					"exclusiveMinimum": 1
+				},
+				"coverageProbability": {
+					"description": "probability that the true value input quantity is within the value plus and minus the expanded uncertainty",
+					"type": "number",
+					"exclusiveMinimum": 0,
+					"maximum": 1
+				},
+				"distribution": {
+					"description": "distribution of the input quantity",
+					"type": "string"
+				},
+				"dof": {
+					"description": "degrees of freedom of the standard uncertainty of the input quantity value",
+					"type": ["number", "null"],
+					"exclusiveMinimum": 0
+				},
+				"evaluationType": {
+					"description": "evaluation type of the uncertainty",
+					"type": "string"
+				},
+				"description": {
+					"description": "description of the input quantity",
+					"type": "string"
+				},
+				"source": {
+					"description": "description of the input quantity",
+					"type": "string"
+				},
+				"measurementModel": {
+					"description": "definition of the mathematical function representing the measurement model and based on the input quantities",
+					"type": "string"
+				}
+			},
+			"required": ["name", "label", "value", "unit", "dateTime", "stdUncertainty", "coverageFactor", "coverageProbability", "distribution", "dof", "evaluationType", "description", "source", "measurementModel"]
+		},
+		"correlation": {
+			"type": "object",
+			"properties": {
+				"variable1": {
+					"description": "first correlated variable",
+					"type": "number",
+					"exclusiveMinimum": 0
+				},
+				"variable2": {
+					"description": "second correlated variable",
+					"type": "number",
+					"exclusiveMinimum": 0
+				},
+				"value": {
+					"description": "value of the correlation between the two variables",
+					"type": "number",
+					"minimum": -1,
+					"maximum": 1
+				}
+			},
+			"required": ["variable1", "variable2", "value"]
+		}
+	},
+
+	"required": ["class", "administrativeData", "uncertaintyBudget", "outputQuantities", "outputCorrelations", "computationDetails"]
+}
