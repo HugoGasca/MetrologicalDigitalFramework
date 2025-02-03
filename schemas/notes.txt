@@ -1,1 +1,6 @@
-
+measurementResult.schema.json
+  next features: 
+    a) review the uncertainty structure and consider the "relevantInformation" to group "densityDistribution" and its parameters as "dof" and others.
+    b) the input quantity can be an output quantity from other measuring system or a measurementResult from a program.
+    c) the measuring systems and measuring instruments should be provided or linked here.
+    d) complete the computation of the output quantity measurement unit.
