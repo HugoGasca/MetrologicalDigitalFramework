@@ -1,7 +1,7 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "measurementResult",
-	"description": "Version 1.0.1; last updated 2025-02-08",
+	"description": "Version 1.0.2; last updated 2025-02-08",
 	"$comments": [
 		"MDF - Metrological Digital Framework",
 		"",
@@ -30,7 +30,7 @@
 		},
 		"schema": {
 			"description": "schema version",
-			"const": "vesion 1.0.1"
+			"const": "vesion 1.0.2"
 		},
 		"administrativeData": {
 			"type": "object",
@@ -38,12 +38,14 @@
 			"properties": {
 				"organization": {
 					"type": "object",
+					"additionalProperties": false,
 					"properties": {
 						"name": {
 							"description": "Name of the organization",
 							"type": "string"
 						}
-					}
+					},
+					"required": ["name"]
 				},
 				"project": {
 					"type": "object",
@@ -53,7 +55,8 @@
 							"description": "Name of the project where the measurementResult is obtained",
 							"type": "string"
 						}
-					}
+					},
+					"required": ["name"]
 				},
 				"software": {
 					"type": "object",
@@ -171,54 +174,86 @@
 			"type": "object",
 			"additionalProperties": false,
 			"properties": {
+				"quantityKind": {
+					"description": "name of the generic quantity kind of the quantity",
+					"type": "string"
+				},
+				"sidfQuantityKind": {
+					"description": "hyperlink to the International System of Units digital reference point of the quantity",
+					"type": "string"
+				},
 				"name": {
-					"description": "name of the input quantity",
+					"description": "name of the quantity",
 					"type": "string"
 				},
 				"label": {
-					"description": "label of the input quantity",
+					"description": "label of the quantity",
 					"type": "string"
 				},
 				"description": {
-					"description": "description of the input quantity",
+					"description": "description of the quantity",
 					"type": "string"
 				},
 				"value": {
-					"description": "value of the input quantity",
+					"description": "value of the quantity",
 					"type": "number"
 				},
-				"unit": {
-					"description": "measurement unit of the input quantity",
+				"valueType": {
+					"description": "type of value of the quantity",
+					"type": "string"
+				},
+				"measurementUnit": {
+					"description": "measurement unit of the quantity",
+					"type": "string"
+				},
+				"sidfMeasurementUnit": {
+					"description": "hyperlink to the International System of Units digital reference point for the measurement unit",
 					"type": "string"
 				},
 				"dateTime": { "$ref": "#/$defs/dateTimeDataType" },
 				"measurementUncertainty": { "$ref": "#/defs/measurementUncertainty" }
 			},
-			"required": ["name", "label", "description", "value", "unit", "dateTime", "measurementUncertainty"]
+			"required": ["quantityKind", "sidfQuantityKind", "name", "label", "description", "value", "valueType", "measurementUnit", "sidfMeasurementUnit", "dateTime", "measurementUncertainty"]
 		},
 		
 		"outputQuantity": {
 			"type": "object",
 			"additionalProperties": false,
 			"properties": {
+				"quantityKind": {
+					"description": "name of the generic quantity kind of the quantity",
+					"type": "string"
+				},
+				"sidfQuantityKind": {
+					"description": "hyperlink to the International System of Units digital reference point of the quantity",
+					"type": "string"
+				},
 				"name": {
-					"description": "name of the input quantity",
+					"description": "name of the quantity",
 					"type": "string"
 				},
 				"label": {
-					"description": "label of the input quantity",
+					"description": "label of the quantity",
 					"type": "string"
 				},
 				"description": {
-					"description": "description of the input quantity",
+					"description": "description of the quantity",
 					"type": "string"
 				},				
 				"value": {
-					"description": "value of the input quantity",
+					"description": "value of the quantity",
 					"type": "number"
 				},
-				"unit": {
-					"description": "measurement unit of the input quantity",
+				"valueType": {
+					"description": "type of value of the quantity",
+					"type": "string"
+				},
+				"measurementUnit": {
+					"description": "measurement unit of the quantity",
+					"type": "string"
+				},
+				"sidfMeasurementUnit": {
+					"description": "hyperlink to the International System of Units digital reference point for the measurement unit",
 					"type": "string"
 				},
 				"dateTime": { "$ref": "#/$defs/dateTimeDataType" },
@@ -228,7 +263,7 @@
 					"type": "string"
 				}
 			},
-			"required": ["name", "label", "description", "value", "unit", "dateTime", "measurementUncertainty", "measurementModel"]
+			"required": ["quantityKind", "sidfQuantityKind", "name", "label", "description", "value", "valueType", "measurementUnit", "sidfMeasurementUnit", "dateTime", "measurementUncertainty", "measurementModel"]
 		},
 		"correlation": {
 			"type": "object",
