@@ -30,7 +30,7 @@
 		},
 		"schema": {
 			"description": "schema version",
-			"const": "vesion 1.0.0"
+			"const": "vesion 1.0.1"
 		},
 		"administrativeData": {
 			"type": "object",
