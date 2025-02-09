@@ -1,7 +1,7 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "measurementResult",
-	"description": "Version 1.0.1; last updated 2025-02-02",
+	"description": "Version 1.0.1; last updated 2025-02-08",
 	"$comments": [
 		"MDF - Metrological Digital Framework",
 		"",
