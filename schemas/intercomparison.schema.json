@@ -106,12 +106,12 @@
 							"description": "version of the software used",
 							"type": "string"
 						},
-						"URL": {
+						"url": {
 							"description": "hyperlink to the software site or production",
 							"type": "string"
 						}
 					},
-					"required": ["name", "version", "URL"]
+					"required": ["name", "version", "url"]
 				}
 			},
 			"required": ["organization", "project", "software"]
